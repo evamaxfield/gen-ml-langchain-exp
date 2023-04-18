@@ -51,3 +51,5 @@ This is also an approach taken by OpenAI with their [Summarizing Book with Human
     * "Summarize public commenters input" -- will it ignore the rest of the meeting?
     * "Summarize each of the council bills in the meeting and their voting results"?
     * More generally, can we guide the summarization model to summarize subsections of interest.
+    * Summarize this meeting but focus on disagreement.
+    * Summarize this for X audience.
