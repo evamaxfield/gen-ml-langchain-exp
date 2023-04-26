@@ -2,7 +2,7 @@
 
 ## Problem
 
-Transcripts aren't enough to get people to stay up-to-date on what is happening directly in council meetings. We have had transcripts for a long time. I don't read them that often unless I am specifically looking for something and I assume many others use them in the same way: only using them when looking for a specific thing.
+Transcripts aren't enough to get people to stay up-to-date on what is happening directly in council meetings. We have had transcripts for a long time. I don't read them that often unless I am specifically looking for something and I assume others use them in the same way: only using them when looking for a specific thing.
 
 ## Potential Solution
 
@@ -26,6 +26,8 @@ I view this model as much more challenging to create but we could start with a s
 * extractive summary and quote(s) about the topics mentioned in the abstract
 * details:
     * pull from prior meeting summaries which reference the same legislative matters (or semantically similar?)
+* related news:
+    * LLM agent try to find news about these matters?
 
 I think this may be possible because we can prompt the summarization model. I.e.:
 
@@ -70,35 +72,40 @@ What I don't think we will explore right now is the "all the data" model that we
    * Fine-tuned SOTA model on government reports + meetings
    * Best model checkpoints are available
 
-TODO:
-* Read more into prompted summarization
-* Try to find meeting summarization papers with user interviews
-* Try to find any papers on city council meeting summarization
-* Try to find any papers on Axios' writing style
-* Look into reddit auto tldr bot
-* Review the BOBA user interview study
+### Prompted Summarization
+
+* [https://arxiv.org/pdf/2302.11520.pdf](https://arxiv.org/pdf/2302.11520.pdf)
+    * Direct example of prompted summarization via hint of extra information / guided information.
+    * Input Article Text
+    * Directions: ... "based on the hint".
+    * Hint: Bob Barker; TV; April 1; "The Price Is Right”; 2007; 91
+    * All hints are generated and are basically the keywords of the article
+* [https://pdfs.semanticscholar.org/fcff/ecd70057c5083f52246e1f7db78b3b59c69f.pdf](https://pdfs.semanticscholar.org/fcff/ecd70057c5083f52246e1f7db78b3b59c69f.pdf)
+    * Create a score system for prompts (not sure I quite follow)
+    * Test plain, 1-shot, 2-shot, and other variants of few-shot learning -> summarization and score on ROUGE.
+    * Prompting is good, generally (results in higher ROUGE scores)
 
 ## Experiment Setup
 
-TODO:
-* Find community members and journalists
-    * Some community members should have very little engagement with city council
-    * Some community members should have high engagement with city council
+* Find eight people who we can ask for time from (CDP volunteers, undergrads, etc.)
+    * Maybe more??
+    * Try to find mix of people that have knowledge of city council
+        * Sung & Brian have some knowledge of city council
+        * Random undergrads likely has less knowledge
+        * Journalists and activists likely have the most knowledge
 
-* Create two summary implementations for a specific meeting that some of the selected individuals will have attended, listened to, watched, etc.
+* Ask half of the individuals to watch an hour-ish long meeting and the other half to watch a two-hour ish long meeting.
+
+* Create two summary implementations for each of the two meetings selected.
 
 * Interview:
     * Ask everyone first:
-        * How do you stay up-to-date on council actions currently?
+        * "How knowledgable do you think you are on city council actions?"
 
     * Then for each summary implementation ask the following (random order the implementations):
-        * For the people who do follow city council / attended / watched:
-            * "Is this a fair representation of what happened in meeting?"
-        * For people who do not follow city council / didn't attend / watch:
-            * "Do you feel more up-to-date on the city council meeting from today / yesterday?"
-        * For everyone:
-            * "What do you like about this summary?"
-            * "What do you dislike about this summary?"
+        * "How well does this summary represent the content of the meeting you watched?"
+        * "What do you like about this summary?"
+        * "What do you dislike about this summary?"
 
     * After both:
         * Which summary did you like more and why?
@@ -111,6 +118,8 @@ TODO:
     * Would a tool for this be useful?
     * Qualitative reviews of interview responses?
        * Possible things to change?
+
+* PROBLEM: "evaluation is only on two meetings / four summarizations" on eight people, basically no statistical power
 
 ## Timeline
 
@@ -134,11 +143,6 @@ Note: Roughly three to four hours of work a week
    * These examples are for us for debugging and reference purposes not for the interviews.
 * **1.5 hours** - Completed draft of user interview plan. All structure, questions, and format decided.
 * **0.5 hours** - Start contacting people for potential interviews.
-   * Four community members
-       * Activists okay
-   * Four journalists
-   * No requirement for individuals to be planning to attend the upcoming meeting.
-       * Selection of individuals should include some that hopefully do end up going to / listening / watching the meeting.
 
 ### May 14 - May 20
 
