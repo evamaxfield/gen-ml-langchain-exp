@@ -1,24 +1,22 @@
 # Experiment Plan for Summarization
 
-## General Idea
-
-### Problem
+## Problem
 
 Transcripts aren't enough to get people to stay up-to-date on what is happening directly in council meetings. We have had transcripts for a long time. I don't read them that often unless I am specifically looking for something and I assume many others use them in the same way: only using them when looking for a specific thing.
 
-### Potential Solution
+## Potential Solution
 
 We want to explore summarization techniques as a potential solution for making each council meeting (and more general) council activity more easily digestable.
 
 This has been proposed by others (and ourselves) but we would like a method to measure the effectiveness of such an approach, and potentially a few different implementations.
 
-#### Potential Implementations
+### Potential Implementations
 
-##### "Read the Abstract"
+#### "Read the Abstract"
 
 The "simpliest" form of summarization. Given all of the text of the meeting, create an abstractive summary of what happened. This can be a paragraph of two.
 
-##### "The Axios Model"
+#### "The Axios Model"
 
 At the moment, I read Axios most frequently. There model definitely hides a lot of detail and nuance from the reader but I like it to get the high level overview of something that if I am interested in further I can then go to AP or NPR or something else to get more details.
 
@@ -39,16 +37,41 @@ Even those prompts may be too simplistic. There is a possibility that we can pro
 
 If the user wants more detail they can read the full transcript of this same meeting or of the prior referenced meetings.
 
-##### All the Data
+#### All the Data
 
 What I don't think we will explore right now is the "all the data" model that we talked to Matt and Dave about. This would include the voting records, minutes item text, and so on. We may pull in elements of those things but definitely not all of it due to the timeline of the quarter and how much time we have left.
 
 ## Background and Literature Review
 
+### Original OpenAI Paper on Map-Reduce Summarization on Books
+
+**[Paper](https://arxiv.org/pdf/2109.10862.pdf)**
+
+* "recursive task decomposition"
+* fine-tuned a model on the smaller tasks
+    * i.e. given a page of text, ask a human to summarize it
+    * fine-tune on these page-sized inputs and summary outputs
+* eval method
+    * take 40 most popular books published in 2020
+    * assign two labelers to read each book and write a summary of the book
+    * ask the labelers to rate summaries from various models and from the other labeler
+    * measure agreement between labelers on the model-written summary quality
+* results
+    * distribution of likert scores on quality of summary
+    * note that on average model-generated summaries are still worse than human-written summaries
+    * likert scales decrease as you climb the levels of decomposition (garbage in, worse garbage out)
+* also tested summaries for question answering -- comparing accuracy of results when asking the summary vs asking the whole document
+* this method lacks coherence -- while they include a lot of important information, they slowly become a list of events.
+
+### Other Map-Reduce Summarization
+
+* [https://aclanthology.org/2022.creativesumm-1.3.pdf](https://aclanthology.org/2022.creativesumm-1.3.pdf)
+* [https://aclanthology.org/2022.acl-long.118.pdf](https://aclanthology.org/2022.acl-long.118.pdf)
+   * Fine-tuned SOTA model on government reports + meetings
+   * Best model checkpoints are available
+
 TODO:
-* Read more into map-reduce summarization
 * Read more into prompted summarization
-* Read more into "no knowledge", "some knowledge", "full knowledge" use interviews (OpenAI book summarization)
 * Try to find meeting summarization papers with user interviews
 * Try to find any papers on city council meeting summarization
 * Try to find any papers on Axios' writing style
@@ -95,9 +118,9 @@ Note: Roughly three to four hours of work a week
 
 ### April 23 - April 29
 
-* **2 hours** - This planning document.
-* **1 hour** - Discussion of this plan and possible changes.
+* **1 hour** - Discussion of this plan and resolving possible changes.
 * **1 hour** - Start working on getting a small dataset created for testing. Twenty meetings just for testing purposes.
+* **1 hour** - Getting setup for summarization, quickstart, and learning.
 
 ### April 30 - May 6
 
